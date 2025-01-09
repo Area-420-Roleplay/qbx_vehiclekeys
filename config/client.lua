@@ -7,20 +7,20 @@
 
 ---@type SkillCheckConfig
 local easyLockpickSkillCheck = {
-    difficulty = { 'easy', 'easy', { areaSize = 60, speedMultiplier = 1 }, 'medium' },
-    inputs = { '1', '2', '3' }
+    difficulty = { { areaSize = 15, speedMultiplier = 0.3 }, { areaSize = 10, speedMultiplier = 0.3 }, { areaSize = 5, speedMultiplier = 0.3 } },
+    inputs = { 'E' }
 }
 
 ---@type SkillCheckConfig
 local normalLockpickSkillCheck = {
-    difficulty = { 'easy', 'easy', { areaSize = 60, speedMultiplier = 1 }, 'medium' },
-    inputs = { '1', '2', '3', '4' }
+    difficulty = { { areaSize = 25, speedMultiplier = 0.3 }, { areaSize = 20, speedMultiplier = 0.3 }, { areaSize = 15, speedMultiplier = 0.3 }, { areaSize = 10, speedMultiplier = 0.3 } },
+    inputs = { 'E' }
 }
 
 ---@type SkillCheckConfig
 local hardLockpickSkillCheck = {
     difficulty = { 'easy', 'easy', { areaSize = 60, speedMultiplier = 2 }, 'medium' },
-    inputs = { '1', '2', '3', '4' }
+    inputs = { 'E' }
 }
 
 return {
@@ -48,9 +48,12 @@ return {
     ---Sends an alert to police
     ---@param crime string
     ---@param vehicle number entity
+    
+    
     alertPolice = function(crime, vehicle)
         TriggerServerEvent('police:server:policeAlert', locale("info.vehicle_theft") .. crime)
     end,
+    
 
     vehicleAlarmDuration = 10000,
     lockpickCooldown = 1000,
@@ -109,7 +112,7 @@ return {
             class = {
                 [VehicleClass.PLANES] = hardLockpickSkillCheck,
                 [VehicleClass.HELICOPTERS] = hardLockpickSkillCheck,
-                [VehicleClass.EMERGENCY] = hardLockpickSkillCheck,
+                [VehicleClass.EMERGENCY] = {}, -- cannot be lockpicked
                 [VehicleClass.MILITARY] = {}, -- cannot be lockpicked
                 [VehicleClass.TRAINS] = {}, -- cannot be lockpicked
                 [VehicleClass.OPEN_WHEEL] = easyLockpickSkillCheck,
@@ -167,9 +170,9 @@ return {
     ---@type AnimConfigEntities
     anims = {
         hotwire = {
-            default = {
-                dict = 'anim@veh@plane@howard@front@ds@base',
-                clip = 'hotwire'
+            default = {  -- Lockpick inside vehicle
+                dict = 'anim@amb@clubhouse@tutorial@bkr_tut_ig3@',
+                clip = 'machinic_loop_mechandplayer'
             },
             class = {},
             model = {}

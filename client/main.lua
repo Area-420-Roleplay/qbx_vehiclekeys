@@ -284,3 +284,7 @@ AddStateBagChangeHandler('isLoggedIn', ('player:%s'):format(cache.serverId), fun
     if not value then return end
     playerEnterVehLoop()
 end)
+
+RegisterNetEvent('qbx_vehiclekeys:client:UpdateLastPicked', function(entity)
+    lastPickedVehicle = entity
+end) 
